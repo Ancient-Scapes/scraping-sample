@@ -3,7 +3,8 @@ defmodule Scraping do
     require Logger
 
     url = "https://gigazine.net/"
-    response = HTTPoison.get!(url)
-    Logger.info "レスポンス: #{inspect response}"
+    body = HTTPoison.get!(url).body
+
+    newsList = Floki.find(body, "div.card > h2 > a")
   end
 end
