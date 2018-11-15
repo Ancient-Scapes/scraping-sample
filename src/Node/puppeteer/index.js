@@ -10,7 +10,7 @@ async function main(){
   const newsListSelector = '#section > div > section > div > h2 > a > span';
   const newsList = await fetchEvaluateTextArray(page, newsListSelector);
 
-  await browser.close();
+  browser.close();
 
   console.log('ページタイトル:' + title);
   console.log(newsList);
