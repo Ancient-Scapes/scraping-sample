@@ -6,6 +6,7 @@ async function main(){
   console.log(newsList);
 }
 
+// 記事のタイトルとリンク一覧を取得
 function fetchNewsList() {
   return new Promise((resolve, reject) => {
     const URL = 'https://gigazine.net/';
@@ -17,6 +18,7 @@ function fetchNewsList() {
   });
 }
 
+// 必要な情報のみ抽出
 function extractionNews(i, el) {
   // 最後の方にある広告は取得したくない
   if(!el.attribs.title) return;

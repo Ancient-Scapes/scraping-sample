@@ -6,6 +6,7 @@ async function main() {
   console.log(newsList);
 }
 
+// 記事のタイトルとリンク一覧を取得
 async function fetchNewsList(){
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -17,7 +18,7 @@ async function fetchNewsList(){
   return newsList;
 }
 
-
+// 必要な情報のみ抽出
 async function extractionNews(page) {
   return page.evaluate(() => {
     return Array.from(document.querySelectorAll('div.card > h2 > a'))
@@ -25,10 +26,11 @@ async function extractionNews(page) {
               return {
                 title: value.title,
                 link: value.href
-              }
+              };
             })
+            // 広告はtitleがないのでfilterで抜く
             .filter((value) => {
-              return value.title !== ''
+              return value.title !== '';
             });
   });
 }
