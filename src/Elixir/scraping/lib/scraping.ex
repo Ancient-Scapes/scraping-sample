@@ -1,13 +1,12 @@
 defmodule Scraping do
   def main do
-    require Logger
+    IO.inspect fetchNewsList
+  end
 
-    url = "https://gigazine.net/"
-    body = HTTPoison.get!(url).body
-
-    newsList = Floki.find(body, "div.card > h2 > a")
-                |> Enum.map(&(extractionNews(&1)))
-    IO.inspect newsList
+  def fetchNewsList do
+    HTTPoison.get!("https://gigazine.net/").body
+    |> Floki.find("div.card > h2 > a")
+    |> Enum.map(&(extractionNews(&1)))
   end
 
   # 必要な情報のみ抽出しMap化
