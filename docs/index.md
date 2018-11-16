@@ -10,3 +10,4 @@
 - [7.async,await、Promiseについて](./7.async,await、Promiseについて.md)
 - [8.puppeteerの説明](./8.puppeteerの説明.md)
 - [9.自分が作ったものの説明](./9.自分が作ったものの説明.md)
+- [10.筆者の自己紹介](./10.筆者の自己紹介.md)

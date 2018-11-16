@@ -10,6 +10,7 @@ async function main(){
 function fetchNewsList() {
   return new Promise((resolve, reject) => {
     axios.get('https://gigazine.net/').then((res) => {
+      console.log(res.data);
       const $ = cheerio.load(res.data);
       resolve($('div.card > h2 > a').map(extractionNews).get());
     });
