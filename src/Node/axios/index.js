@@ -11,8 +11,6 @@ function fetchNewsList() {
     const URL = 'https://gigazine.net/';
 
     axios.get(URL).then((res) => {
-      if (res.status !== 200) reject();
-  
       const $ = cheerio.load(res.data);
       resolve($('div.card > h2 > a').map(extractionNews).get());
     });
