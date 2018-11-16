@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const URL = 'https://gigazine.net/';
 
 async function main() {
   const newsList = await fetchNewsList();
@@ -10,7 +9,7 @@ async function main() {
 async function fetchNewsList(){
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(URL);
+  await page.goto('https://gigazine.net/');
 
   const newsList = await extractionNews(page);
 

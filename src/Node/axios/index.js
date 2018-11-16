@@ -9,9 +9,7 @@ async function main(){
 // 記事のタイトルとリンク一覧を取得
 function fetchNewsList() {
   return new Promise((resolve, reject) => {
-    const URL = 'https://gigazine.net/';
-
-    axios.get(URL).then((res) => {
+    axios.get('https://gigazine.net/').then((res) => {
       const $ = cheerio.load(res.data);
       resolve($('div.card > h2 > a').map(extractionNews).get());
     });
