@@ -1,24 +1,32 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const URL = 'https://gigazine.net/';
 
-function main(){
-  axios.get(URL).then((res) => {
-    if (res.status !== 200) {
-      console.log('error');
-      process.exit(1);
-    }
+async function main(){
+  const newsList = await fetchNewsList();
+  console.log(newsList);
+}
 
-    const $ = cheerio.load(res.data);
-    const title = $('title').text();
-    const newsList = $('#section > div > section > div > h2 > a > span').map(function(i, el) {
-      const newsTitle = el.children[0].data;
-      return newsTitle;
-    }).get();
+function fetchNewsList() {
+  return new Promise((resolve, reject) => {
+    const URL = 'https://gigazine.net/';
 
-    console.log('ページタイトル:' + title);
-    console.log(newsList);
+    axios.get(URL).then((res) => {
+      if (res.status !== 200) reject();
+  
+      const $ = cheerio.load(res.data);
+      resolve($('div.card > h2 > a').map(extractionNews).get());
+    });
   });
+}
+
+function extractionNews(i, el) {
+  // 最後の方にある広告は取得したくない
+  if(!el.attribs.title) return;
+
+  return {
+    title: el.attribs.title,
+    link: el.attribs.href
+  }
 }
 
 main();
