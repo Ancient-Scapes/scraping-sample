@@ -20,7 +20,6 @@ defmodule Scraping.MixProject do
   defp deps do
     [
       {:httpoison, "~> 0.7.2"},
-      {:poison, "~> 1.5"},
       {:floki, "~> 0.17.2"}
     ]
   end
