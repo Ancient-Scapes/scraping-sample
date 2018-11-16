@@ -7,6 +7,7 @@ defmodule Scraping do
     HTTPoison.get!("https://gigazine.net/").body
     |> Floki.find("div.card > h2 > a")
     |> Enum.map(&(extractionNews(&1)))
+    |> Enum.filter(&(&1["title"] !== []))
   end
 
   # 必要な情報のみ抽出しMap化
